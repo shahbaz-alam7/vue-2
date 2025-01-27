@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="cart">Cart {{cart.length}}</div>
+
+      <product
+        :premium="premium"
+        :cart="cart"
+        :selected_product="selectedProduct"
+        @add-to-cart="updateCart"
+        @select-product="handleProduct"
+        @reset-cart="resetCart"
+      ></product>
+      <div class="reviews-section">
+        <tabs
+          @change-tab="updateTab"
+          :selectedtab="selectedTab"
+          :selected_product="selectedProduct"
+          :reviews="reviews"
+        ></tabs>
+        <review-form
+          v-show="selectedTab == 0"
+          @sumbit-review="handleReviewSubmit"
+        ></review-form>
+        <reviews
+          v-show="selectedTab == 1"
+          :reviews="reviews"
+          :selected_product="selectedProduct"
+        ></reviews>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="./components/product.js"></script>
+    <script src="./components/reviewForm.js"></script>
+    <script src="./components/reviews.js"></script>
+    <script src="./components/tabs.js"></script>
+    <script src="./index.js"></script>
+  </body>
 </html>
